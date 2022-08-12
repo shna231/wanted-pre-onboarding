@@ -21,7 +21,6 @@ import { PostModule } from './post/post.module';
       synchronize: true,
       autoLoadEntities: true,
       namingStrategy: new SnakeNamingStrategy(),
-      logging: true,
     }),
   ],
   controllers: [],

@@ -16,7 +16,7 @@ export class Company {
   @Column({ comment: '국가', default: '한국' })
   contry!: string;
 
-  @Column({ comment: '지역', default: 'hm_01' })
+  @Column({ comment: '지역', default: '제주도' })
   region!: string;
 
   @OneToMany(() => Post, (post) => post.company)
