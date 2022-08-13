@@ -1,5 +1,4 @@
-import { Entity, Column, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Post } from '../post/post.entity';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Company {
@@ -18,7 +17,4 @@ export class Company {
 
   @Column({ comment: '지역', default: '제주도' })
   region!: string;
-
-  @OneToMany(() => Post, (post) => post.company)
-  posts!: Post[];
 }

@@ -10,7 +10,3 @@ export interface AddCompanyDTO {
   readonly contry: string;
   readonly region: string;
 }
-
-export interface GetCompanyDTO {
-  readonly company_list?: Company[] | null;
-}

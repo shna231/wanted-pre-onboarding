@@ -1,6 +1,5 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { GetCompanyDTO } from './company.dto';
-import { AddCompanyDTO } from './company.dto';
+import { AddCompanyDTO, Company } from './company.dto';
 import { CompanyService } from './company.service';
 import { ApiTags } from '@nestjs/swagger';
 import { debug } from 'console';
@@ -12,13 +11,14 @@ export class CompanyController {
 
   @Post('add')
   insertOne(@Body() req: AddCompanyDTO) {
-    debug('debug print test');
+    debug('controller check: company - add');
     debug(req.name);
     return this.companyService.insertOne(req);
   }
 
   @Get('all')
-  async getAll(): Promise<GetCompanyDTO> {
+  async getAll(): Promise<Company[]> {
+    debug('controller check: company - getAll');
     return this.companyService.getAll();
   }
 }

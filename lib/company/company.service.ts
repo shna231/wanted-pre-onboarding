@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { AddCompanyDTO } from './company.dto';
-import { GetCompanyDTO } from './company.dto';
 import { Repository } from 'typeorm';
 import { Company } from '../company/company.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -20,9 +19,9 @@ export class CompanyService {
     });
   }
 
-  async getAll(): Promise<GetCompanyDTO> {
+  async getAll(): Promise<Company[]> {
     const response = await this.companyRepository.find();
 
-    return { company_list: response };
+    return response;
   }
 }
