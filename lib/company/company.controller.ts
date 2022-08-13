@@ -12,7 +12,6 @@ export class CompanyController {
   @Post('add')
   insertOne(@Body() req: AddCompanyDTO) {
     debug('controller check: company - add');
-    debug(req.name);
     return this.companyService.insertOne(req);
   }
 

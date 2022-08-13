@@ -1,4 +1,10 @@
-import { Entity, Column, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  JoinColumn,
+  ManyToOne,
+} from 'typeorm';
 import { Company } from '../company/company.entity';
 
 @Entity()
@@ -8,29 +14,21 @@ export class Post {
   }
 
   @PrimaryGeneratedColumn({ comment: '채용 공고 ID' })
-  id?: number;
+  id!: number;
 
-  @Column({ comment: '회사 ID', default: 'hm_01' })
-  shop_id!: string;
-
-  @Column({ comment: '채용 등록 일자' })
-  start_date: Date;
-
-  @Column({ comment: '채용 마감 일자' })
-  end_date: Date;
+  @ManyToOne(() => Company, (company) => company.posts, { nullable: false })
+  @JoinColumn({ name: 'shop_id' })
+  shop_id!: Company;
 
   @Column({ comment: '채용 포지션' })
-  post!: number;
+  pos!: string;
 
   @Column({ comment: '채용 보상금' })
-  price!: Date;
+  price!: number;
 
   @Column({ comment: '채용 내용' })
-  content!: Date;
+  content!: string;
 
   @Column({ comment: '채용 기술' })
-  tech!: Date;
-
-  @ManyToOne(() => Company, (company) => company.posts)
-  company!: Company;
+  tech!: string;
 }
