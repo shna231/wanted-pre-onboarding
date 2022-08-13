@@ -10,7 +10,12 @@ import {
 } from '@nestjs/common';
 import { PostService } from './post.service';
 import { ApiTags } from '@nestjs/swagger';
-import { CreatePostDTO, SimplePostDTO, UpdatePostDTO } from './post.dto';
+import {
+  CreatePostDTO,
+  DetailPostDTO,
+  SimplePostDTO,
+  UpdatePostDTO,
+} from './post.dto';
 import { debug } from 'console';
 
 @Controller('post')
@@ -33,6 +38,12 @@ export class PostController {
   @Get()
   async search(@Query('search') search: string): Promise<SimplePostDTO[]> {
     return await this.postService.search(search);
+  }
+
+  @Get(':id')
+  async getOne(@Param('id') id: number): Promise<DetailPostDTO> {
+    debug('controller check: post - getAll id : ' + id);
+    return await this.postService.getOne(id);
   }
 
   @Put(':id')
