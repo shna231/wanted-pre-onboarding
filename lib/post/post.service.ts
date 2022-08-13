@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Post } from '../post/post.entity';
 import { Company } from '../company/company.entity';
-import { CreatePostDTO, SimplePostDTO } from '../post/post.dto';
+import { CreatePostDTO, SimplePostDTO, UpdatePostDTO } from '../post/post.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
@@ -51,5 +51,13 @@ export class PostService {
       });
 
     return post_list;
+  }
+
+  async update(id: number, updateData: UpdatePostDTO) {
+    return await this.postRepository.update(id, updateData);
+  }
+
+  async remove(id: number) {
+    return await this.postRepository.delete(id);
   }
 }

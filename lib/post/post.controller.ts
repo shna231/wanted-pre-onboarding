@@ -1,7 +1,15 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { PostService } from './post.service';
 import { ApiTags } from '@nestjs/swagger';
-import { CreatePostDTO, SimplePostDTO } from './post.dto';
+import { CreatePostDTO, SimplePostDTO, UpdatePostDTO } from './post.dto';
 import { debug } from 'console';
 
 @Controller('post')
@@ -16,8 +24,18 @@ export class PostController {
   }
 
   @Get('all')
-  async getAll() {
+  async getAll(): Promise<SimplePostDTO[]> {
     debug('controller check: post - getAll');
     return await this.postService.getAll();
+  }
+
+  @Put(':id')
+  async update(@Param('id') id: number, @Body() updatePostDto: UpdatePostDTO) {
+    return await this.postService.update(id, updatePostDto);
+  }
+
+  @Delete(':id')
+  async remove(@Param('id') id: number) {
+    return await this.postService.remove(id);
   }
 }

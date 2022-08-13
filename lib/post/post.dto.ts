@@ -15,6 +15,13 @@ export interface CreatePostDTO {
   readonly tech: string;
 }
 
+export interface UpdatePostDTO {
+  readonly pos: string;
+  readonly price: number;
+  readonly content: string;
+  readonly tech: string;
+}
+
 export interface SimplePostDTO {
   readonly id: number;
   readonly shop_name: string;
