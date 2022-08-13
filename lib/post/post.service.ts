@@ -4,6 +4,7 @@ import { Post } from '../post/post.entity';
 import { Company } from '../company/company.entity';
 import { CreatePostDTO, SimplePostDTO, UpdatePostDTO } from '../post/post.dto';
 import { InjectRepository } from '@nestjs/typeorm';
+import { debug } from 'console';
 
 @Injectable()
 export class PostService {
@@ -29,11 +30,38 @@ export class PostService {
     });
   }
 
-  async getAll() {
+  async getAll(): Promise<SimplePostDTO[]> {
     const post_list: SimplePostDTO[] = [];
     await this.postRepository
       .find({
         relations: ['shop_id'],
+      })
+      .then((value) => {
+        value.forEach((el) => {
+          const p: SimplePostDTO = {
+            id: el.id,
+            shop_name: el.shop_id.name,
+            contry: el.shop_id.contry,
+            region: el.shop_id.region,
+            pos: el.pos,
+            price: el.price,
+            tech: el.tech,
+          };
+          post_list.push(p);
+        });
+      });
+
+    return post_list;
+  }
+
+  async search(search: string): Promise<SimplePostDTO[]> {
+    const post_list: SimplePostDTO[] = [];
+
+    // search : pos, tech
+    await this.postRepository
+      .find({
+        relations: ['shop_id'],
+        where: [{ pos: search }, { tech: search }],
       })
       .then((value) => {
         value.forEach((el) => {

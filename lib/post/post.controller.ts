@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { PostService } from './post.service';
 import { ApiTags } from '@nestjs/swagger';
@@ -27,6 +28,11 @@ export class PostController {
   async getAll(): Promise<SimplePostDTO[]> {
     debug('controller check: post - getAll');
     return await this.postService.getAll();
+  }
+
+  @Get()
+  async search(@Query('search') search: string): Promise<SimplePostDTO[]> {
+    return await this.postService.search(search);
   }
 
   @Put(':id')
