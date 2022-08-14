@@ -124,10 +124,30 @@ export class PostService {
   }
 
   async update(id: number, updateData: UpdatePostDTO) {
-    return await this.postRepository.update(id, updateData);
+    const success_res = '수정되었습니다.';
+    const fail_res = '존재하지 않는 공고입니다.';
+
+    const existed = await this.postRepository.findOne({ where: { id: id } });
+
+    if (existed == null) {
+      return fail_res;
+    } else {
+      await this.postRepository.update(id, updateData);
+      return success_res;
+    }
   }
 
   async remove(id: number) {
-    return await this.postRepository.delete(id);
+    const success_res = '삭제되었습니다.';
+    const fail_res = '존재하지 않는 공고입니다.';
+
+    const existed = await this.postRepository.findOne({ where: { id: id } });
+
+    if (existed == null) {
+      return fail_res;
+    } else {
+      await this.postRepository.delete(id);
+      return success_res;
+    }
   }
 }
