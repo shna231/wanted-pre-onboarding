@@ -12,6 +12,6 @@ export class UserController {
   @Post('apply')
   create(@Body() req: ApplyDTO) {
     debug('controller check: user apply - create');
-    return this.userService.create(req);
+    return this.userService.apply(req);
   }
 }

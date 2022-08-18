@@ -11,7 +11,7 @@ export class UserService {
     private readonly applicantRepository: Repository<Applicant>,
   ) {}
 
-  async create(req: ApplyDTO) {
+  async apply(req: ApplyDTO) {
     const success_res = '지원되었습니다.';
     const fail_res = '이미 지원한 공고입니다.';
 
