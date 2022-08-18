@@ -1,73 +1,247 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# 채용 공고 등록 및 지원 시스템
+> 원티드 프리온보딩 백엔드 코스 사전과제 입니다.
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+<br />
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+회사에서는 채용 공고의 등록, 수정, 삭제가 가능합니다.
 
-## Installation
+지원자는 모든 채용 공고를 불러오거나,
 
-```bash
-$ npm install
+'Python', '백엔드' 등 특정 키워드로 검색할 수 있습니다. 
+
+그 중 관심 있는 채용 공고는 상세 내용 & 동일 회사의 다른 공고 리스트를 확인할 수 있습니다.
+
+하나의 채용 공고에 대해 한 번만 지원할 수 있습니다.
+
+<br />
+<br />
+
+# 테스트 방법
+
+실행:
+
+```sh
+yarn
+npm run debug
 ```
 
-## Running the app
+<br />
 
-```bash
-# development
-$ npm run start
+swagger:
+[http://localhost:9000/docs](http://localhost:9000/docs)
 
-# watch mode
-$ npm run start:dev
+<br />
+<br />
 
-# production mode
-$ npm run start:prod
+
+# 사용 예제
+
+## 1. 회사
+### 1.1 등록 (POST)
+Request URL : `http://localhost:9000/company/add`
+
+Request Body Example : 
+``` javascript
+{
+  "name":"가시",
+  "contry":"한국",
+  "region":"서울"
+}
 ```
 
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+Resonse Example(등록된 회사 목록) : 
+``` javascript
+[
+    {
+        "id": 1,
+        "name": "가시",
+        "contry": "한국",
+        "region": "서울"
+    },
+    ...
+]
 ```
 
-## Support
+<br />
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### 1.2 목록 보기 (GET)
+Request URL : `http://localhost:9000/company/all`
 
-## Stay in touch
+Resonse Example : 
+``` javascript
+[
+  {
+    "id": 1,
+    "name": "가시",
+    "contry": "한국",
+    "region": "서울"
+  },
+  ...
+]
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+<br />
+<br />
 
-## License
+## 2. 채용 공고
+### 2.1 등록 (POST)
+Request URL : `http://localhost:9000/post/add`
 
-Nest is [MIT licensed](LICENSE).
+Request Body Example:
+``` javascript
+{
+  "name":"너랑나",
+  "contry":"태국",
+  "region":"방콕"
+}
+```
+
+Response Example :
+``` javascript
+{
+  "identifiers": [
+    {
+      "id": 5
+    }
+  ],
+  "generatedMaps": [
+    {
+      "id": 5
+    }
+  ],
+  "raw": [
+    {
+      "id": 5
+    }
+  ]
+}`
+```
+
+
+<br />
+
+### 2.2 목록 보기 (GET)
+Request URL : `http://localhost:9000/post/all`
+
+Resonse Example : 
+```javascript
+[
+  {
+    "id": 7,
+    "shop_name": "원티드",
+    "contry": "한국",
+    "region": "서울",
+    "pos": "백엔드",
+    "price": 500,
+    "tech": "Nest.js"
+  },
+  ...
+]
+```
+
+<br />
+
+### 2.3 검색 (GET)
+Request URL : `http://localhost:9000/post?search={search}`
+
+Resonse Example(search : '백엔드') : 
+``` javascript
+[
+  {
+    "id": 11,
+    "shop_name": "원티드",
+    "contry": "한국",
+    "region": "서울",
+    "pos": "백엔드",
+    "price": 2020,
+    "tech": "Python"
+  },
+  {
+    "id": 7,
+    "shop_name": "원티드",
+    "contry": "한국",
+    "region": "서울",
+    "pos": "백엔드",
+    "price": 500,
+    "tech": "Nest.js"
+  },
+  ...
+]
+```
+
+<br />
+
+### 2.4 채용 공고 상세 (GET)
+Request URL : `http://localhost:9000/post/{post_id}`
+
+Resonse Example : 
+``` javascript
+{
+  "id": 7,
+  "shop_name": "원티드",
+  "contry": "한국",
+  "region": "서울",
+  "pos": "백엔드",
+  "price": 500,
+  "tech": "Nest.js",
+  "content": "내용입니다.",
+  "others": [
+    7,
+    11
+  ]
+}
+```
+
+<br />
+
+### 2.4 수정 및 삭제 (PUT, DELETE)
+Request URL : `http://localhost:9000/post/{post_id}`
+
+[수정] Request Body Example : 
+``` javascript
+{
+  "pos":"DevOps",
+  "price":0,
+  "content":"수정된 내용입니다.",
+  "tech":"Scala"
+}
+```
+
+[수정] Resonse Example : `수정되었습니다. | 존재하지 않는 공고입니다.`
+
+[삭제] Resonse Example : `삭제되었습니다. | 존재하지 않는 공고입니다.`
+
+<br />
+<br />
+
+## 3. 사용자
+### 3.1 지원 (POST)
+Request URL : `http://localhost:9000/user/apply`
+
+Request Body Example : 
+``` javascript
+{"id":1,"post_id":"4"}
+```
+Resonse Example : `지원되었습니다. | 이미 지원한 공고입니다.`
+
+<br />
+<br />
+
+# 정보
+
+나소현 – shna231@google.com
+
+MIT 라이센스를 준수합니다.
+
+<br />
+<br />
+
+# 기여 방법
+
+1. (<https://github.com/yourname/yourproject/fork>)을 포크합니다.
+2. (`git checkout -b feature/fooBar`) 명령어로 새 브랜치를 만드세요.
+3. (`git commit -am 'Add some fooBar'`) 명령어로 커밋하세요.
+4. (`git push origin feature/fooBar`) 명령어로 브랜치에 푸시하세요. 
+5. 풀리퀘스트를 보내주세요.
