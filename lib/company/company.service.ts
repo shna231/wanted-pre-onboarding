@@ -12,11 +12,13 @@ export class CompanyService {
   ) {}
 
   async insertOne(req: AddCompanyDTO) {
-    return await this.companyRepository.insert({
+    const response = await this.companyRepository.insert({
       name: req.name,
       contry: req.contry,
       region: req.region,
     });
+
+    return await this.companyRepository.find();
   }
 
   async getAll(): Promise<Company[]> {
