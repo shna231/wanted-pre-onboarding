@@ -295,7 +295,7 @@ npm install --save @nestjs/swagger swagger-ui-express
 
 <br />
 
-데이터베이스 생성(S3): postgreSQL
+데이터베이스 생성(AWS RDS): postgreSQL
 
 <br />
 
